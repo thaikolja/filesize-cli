@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+diff.txt
+
+# C extensions
+*.so
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+.env/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Pytest cache
+.cache/
+.pytest_cache/
+
+# Logs
+*.log
+
+# IDEs and editors
+.vscode/
+.idea/
+!.idea/copyright/
+!.idea/codeStyles/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+.diff

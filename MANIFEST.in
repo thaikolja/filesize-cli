@@ -1,0 +1,23 @@
+include README.md
+include LICENSE
+include CHANGELOG.md
+include CONTRIBUTING.md
+include MANIFEST.in
+include pyproject.toml
+include Makefile
+include .gitignore
+include .pre-commit-config.yaml
+include install.sh
+recursive-include src *
+recursive-include homebrew *
+recursive-include scripts *
+recursive-include .github *
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude .git*
+global-exclude *.egg-info
+global-exclude build
+global-exclude dist
+global-exclude .coverage
+global-exclude coverage.xml
+global-exclude htmlcov

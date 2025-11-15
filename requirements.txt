@@ -1,0 +1,2 @@
+# Production dependencies for filesize-cli
+# filesize-cli has no external dependencies - it uses only Python standard library
