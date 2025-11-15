@@ -58,20 +58,20 @@ install_with_homebrew() {
 
 install_from_source() {
     print_info "Installing from source..."
-    
+
     # Create temp directory
     TEMP_DIR=$(mktemp -d)
     cd "$TEMP_DIR"
-    
+
     # Clone and install
     git clone https://github.com/thaikolja/filesize-cli.git
     cd filesize-cli
     pip3 install .
-    
+
     # Cleanup
     cd ..
     rm -rf "$TEMP_DIR"
-    
+
     print_success "filesize-cli installed from source"
 }
 
@@ -80,7 +80,7 @@ main() {
     echo "filesize-cli v2.0.0 Installation Script"
     echo "======================================="
     echo ""
-    
+
     # Detect OS
     if [[ "$OSTYPE" == "darwin"* ]]; then
         OS="macOS"
@@ -89,15 +89,15 @@ main() {
     else
         OS="Unknown"
     fi
-    
+
     print_info "Detected OS: $OS"
-    
+
     # Check Python installation
     if ! command_exists python3; then
         print_error "Python 3 is required but not installed"
         exit 1
     fi
-    
+
     # Try different installation methods
     if command_exists brew && command_exists pipx; then
         echo "Choose installation method:"
@@ -108,7 +108,7 @@ main() {
         echo "5) Auto-select best method"
         echo ""
         read -p "Enter choice [1-5]: " choice
-        
+
         case $choice in
             1) install_with_homebrew ;;
             2) install_with_pipx ;;
@@ -123,7 +123,7 @@ main() {
                     install_with_pip
                 fi
                 ;;
-            *) 
+            *)
                 print_error "Invalid choice"
                 exit 1
                 ;;
@@ -138,7 +138,7 @@ main() {
             install_with_pip
         fi
     fi
-    
+
     # Verify installation
     echo ""
     print_info "Verifying installation..."
