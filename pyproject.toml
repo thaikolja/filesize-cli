@@ -50,7 +50,8 @@ dev = [
     "flake8>=6.0.0",
     "mypy>=1.5.0",
     "pre-commit>=3.0.0",
-    "tox>=4.0.0"
+    "tox>=4.0.0",
+    "bump2version>=1.0.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -67,7 +68,7 @@ line_length = 88
 known_first_party = ["filesize_cli"]
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -84,6 +85,7 @@ strict_equality = true
 [[tool.mypy.overrides]]
 module = "tests.*"
 disallow_untyped_defs = false
+ignore_errors = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

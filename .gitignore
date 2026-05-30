@@ -35,6 +35,11 @@ var/
 .cache/
 .pytest_cache/
 
+# Coverage
+.coverage
+coverage.xml
+htmlcov/
+
 # Logs
 *.log
 
