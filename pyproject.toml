@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=45", "wheel"]
+requires = ["setuptools>=75.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "filesize-cli"
-version = "2.0.0"
+version = "2.1.0"
 description = "Calculate file and directory sizes from the command line"
 authors = [
     { name = "Kolja Nolte", email = "kolja.nolte@gmail.com" }
@@ -18,6 +18,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Development Status :: 5 - Production/Stable",
@@ -42,16 +43,18 @@ filesize = "filesize_cli.cli:main"
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
-    "pytest-mock>=3.10.0",
-    "black>=23.0.0",
-    "isort>=5.12.0",
-    "flake8>=6.0.0",
-    "mypy>=1.5.0",
-    "pre-commit>=3.0.0",
+    "pytest>=9.0.0",
+    "pytest-cov>=7.0.0",
+    "pytest-mock>=3.15.0",
+    "black>=26.0.0",
+    "isort>=8.0.0",
+    "flake8>=7.0.0",
+    "mypy>=2.0.0",
+    "pre-commit>=4.0.0",
     "tox>=4.0.0",
     "bump2version>=1.0.0",
+    "bandit>=1.8.0",
+    "safety>=3.0.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -59,7 +62,7 @@ where = ["src"]
 
 [tool.black]
 line-length = 88
-target-version = ['py39', 'py310', 'py311', 'py312']
+target-version = ['py39', 'py310', 'py311', 'py312', 'py313']
 
 [tool.isort]
 profile = "black"
@@ -68,7 +71,7 @@ line_length = 88
 known_first_party = ["filesize_cli"]
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.13"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -81,11 +84,6 @@ warn_unused_ignores = true
 warn_no_return = true
 warn_unreachable = true
 strict_equality = true
-
-[[tool.mypy.overrides]]
-module = "tests.*"
-disallow_untyped_defs = false
-ignore_errors = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
