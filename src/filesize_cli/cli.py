@@ -23,7 +23,7 @@ various output formats.
 import argparse
 import sys
 from pathlib import Path
-from typing import List, Optional, Union
+from typing import List, Optional, Union, cast
 
 from . import __version__
 
@@ -56,14 +56,14 @@ class FilesizeCLI:
         parser = argparse.ArgumentParser(
             description="Calculate file and directory sizes",
             formatter_class=argparse.RawDescriptionHelpFormatter,
-            epilog="""
-			Examples:
-				filesize file.txt              # Show size with auto unit
-				filesize -u mb file.txt        # Force megabytes
-				filesize -c file.txt           # Raw bytes only
-				filesize -r directory/         # Recursive directory size
-				filesize file1.txt file2.txt   # Multiple paths
-			""",
+            epilog=(
+                "Examples:\n"
+                "  filesize file.txt              # Show size with auto unit\n"
+                "  filesize -u mb file.txt        # Force megabytes\n"
+                "  filesize -c file.txt           # Raw bytes only\n"
+                "  filesize -r directory/         # Recursive directory size\n"
+                "  filesize file1.txt file2.txt   # Multiple paths\n"
+            ),
         )
 
         parser.add_argument(
@@ -111,11 +111,12 @@ class FilesizeCLI:
         Calculate and display sizes for provided paths.
 
         Args:
-                        input_paths: Single path string or list of path strings. If None,
-                                                                        uses paths from command-line arguments.
+            input_paths: Single path string or list of path strings.
+                If None, uses paths from command-line arguments.
 
         Returns:
-                        Formatted output string if input_paths provided, None otherwise.
+            Formatted output string if input_paths provided,
+            None otherwise.
         """
         paths = self._normalize_paths(input_paths)
         results = []
@@ -140,7 +141,7 @@ class FilesizeCLI:
     ) -> List[str]:
         """Normalize input paths to a list of strings."""
         if input_paths is None:
-            return self.args.paths
+            return cast(List[str], self.args.paths)
 
         if isinstance(input_paths, str):
             return [input_paths]
@@ -169,11 +170,14 @@ class FilesizeCLI:
         Compute total size and file count for a path.
 
         Args:
-                        path: Path to file or directory
+            path: Path to file or directory
 
         Returns:
-                        Dictionary with 'files', 'size', and 'unit' keys
+            Dictionary with 'files', 'size', and 'unit' keys
         """
+        if not path.exists():
+            raise FileNotFoundError(f"Path does not exist: {path}")
+
         if path.is_file():
             try:
                 stat = path.stat()
@@ -207,10 +211,10 @@ class FilesizeCLI:
         Format size in bytes to human-readable string.
 
         Args:
-                        size: Size in bytes (must be non-negative)
+            size: Size in bytes (must be non-negative)
 
         Returns:
-                        Formatted string like "12.34 MB"
+            Formatted string like "12.34 MB"
         """
         if not isinstance(size, (int, float)) or size < 0:
             raise ValueError("Size must be a non-negative number")
